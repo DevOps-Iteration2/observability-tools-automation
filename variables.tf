@@ -7,5 +7,5 @@ variable "tools" {
 }
 
 variable "zone_id" {
-  default = ""
+  default = "Z09871307W8RRL5S85YD"
 }
