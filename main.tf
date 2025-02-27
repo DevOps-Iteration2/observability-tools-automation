@@ -4,7 +4,7 @@ module "tools" {
 
   tool_name            = each.key
   instance_type        = each.value["instance_type"]
-  policy_resource_list = each.value["policy_resource_list"]
+  policy_resource_list = each.value["policy_resource_list"] # test
 
   zone_id       = var.zone_id
 }
