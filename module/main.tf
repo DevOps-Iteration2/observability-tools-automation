@@ -1,7 +1,7 @@
 resource "aws_instance" "instance" {
   ami                    = data.aws_ami.ami.image_id
   instance_type          = var.instance_type
-  vpc_security_group_ids = [data.aws_security_group.sg.vpc_id]
+  vpc_security_group_ids = [data.aws_security_group.sg.id]
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
   tags   = {
     Name = var.tool_name
@@ -20,7 +20,7 @@ resource "aws_iam_role" "role" {
   name = "${var.tool_name}-role"
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version   = "2012-10-17"
     Statement = [
       {
         Action = "sts:AssumeRole"
@@ -33,24 +33,25 @@ resource "aws_iam_role" "role" {
     ]
   })
 
-  inline_policy {
-    name = "${var.tool_name}-inline-policy"
-
-    policy = jsonencode({
-      Version = "2012-10-17"
-      Statement = [
-        {
-          Action   = var.policy_resource_list
-          Effect   = "Allow"
-          Resource = "*"
-        },
-      ]
-    })
-  }
-
   tags = {
     Name = "${var.tool_name}-role"
   }
+}
+
+resource "aws_iam_role_policy" "policy" {
+  name = "${var.tool_name}-role-policy"
+  role   = aws_iam_role.role.name
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = var.policy_resource_list
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+
 }
 
 resource "aws_iam_instance_profile" "instance_profile" {
