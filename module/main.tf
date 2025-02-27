@@ -48,7 +48,7 @@ resource "aws_iam_role" "role" {
 
 resource "aws_iam_role_policy" "policy" {
   name = "${var.tool_name}-role-policy"
-  role   = aws_iam_role.role.name
+  role   = aws_iam_role.role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
