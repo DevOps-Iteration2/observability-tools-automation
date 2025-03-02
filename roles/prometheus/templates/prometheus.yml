@@ -12,7 +12,7 @@ scrape_configs:
             values: ["yes", "true"]
 
     relabel_configs:
-      - source_labels: [_meta_ec2_tag_Name]
+      - source_labels: [__meta_ec2_tag_Name]
         target_label: name
-      - source_labels: [_meta_ec2_tag_monitor]
+      - source_labels: [__meta_ec2_tag_monitor]
         target_label: env
