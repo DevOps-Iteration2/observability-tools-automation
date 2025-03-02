@@ -17,7 +17,7 @@ resource "aws_instance" "instance" {
 }
 
 resource "aws_route53_record" "record" {
-  name    = "${var.tool_name}-internal"
+  name    = var.instance_type
   type    = "A"
   zone_id = var.zone_id
   records = [aws_instance.instance.public_ip]
@@ -25,7 +25,7 @@ resource "aws_route53_record" "record" {
 }
 
 resource "aws_route53_record" "record-internal" {
-  name    = var.tool_name
+  name    = "${var.tool_name}-internal"
   type    = "A"
   zone_id = var.zone_id
   records = [aws_instance.instance.private_ip]
