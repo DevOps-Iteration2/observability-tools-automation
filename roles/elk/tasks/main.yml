@@ -8,12 +8,12 @@
 
 - name: Install elasticsearch
   ansible.builtin.dnf:
-    name: elastic
+    name: elasticsearch
     state: latest
 
 - name: Start elasticsearch service
   ansible.builtin.systemd_service:
-    name: elastic
+    name: elasticsearch
     state: started
     enabled: true
 
@@ -21,3 +21,31 @@
   ansible.builtin.dnf:
     name: kibana
     state: latest
+
+- name: Update Kibana config Port line
+  ansible.builtin.lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: '^#server.port: 5601'
+    line: 'server.port: 5601'
+
+- name: Update Kibana config IP Line
+  ansible.builtin.lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: '^#server.host: localhost'
+    line: 'server.host:0.0.0.0'
+
+- name: Start Kibana
+  ansible.builtin.systemd_service:
+    name: kibana
+    state: started
+    enabled: true
+
+
+# Reset the password of the elastic built-in superuser with
+# /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+#
+# Generate an enrollment token for Kibana instances with
+# /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+#
+# Verification token for Kibana
+# /usr/share/kibana/bin/kibana-verification-code
