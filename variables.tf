@@ -12,6 +12,10 @@ variable "tools" {
       instance_type = "t3.small"
       policy_resource_list = []
     }
+    elasticsearch = {
+      instance_type = ""
+      policy_resource_list = []
+    }
   }
 }
 
