@@ -11,8 +11,15 @@ resource "aws_instance" "instance" {
       spot_instance_type             = "persistent"
     }
   }
+
   tags   = {
     Name = var.tool_name
+  }
+
+  lifecycle {
+    ignore_changes = [
+    ami,
+    ]
   }
 }
 
