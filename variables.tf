@@ -13,7 +13,7 @@ variable "tools" {
       policy_resource_list = []
     }
     elasticsearch = {
-      instance_type = ""
+      instance_type = "r7i.large"
       policy_resource_list = []
     }
   }
