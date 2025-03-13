@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  vault:
+  elk:
     group: Tools
     materials:
       git-b844969:
