@@ -21,7 +21,7 @@
   ansible.builtin.unarchive:
     src: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.3.0.104237.zip
     dest: /opt/sonarqube
-    remote_src:
+    remote_src: yes
   become_user: sonar
 
 - name: Setup Service file
