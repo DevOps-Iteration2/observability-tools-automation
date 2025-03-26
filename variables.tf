@@ -24,6 +24,10 @@ variable "tools" {
       instance_type = "t3.small"
       policy_resource_list = []
     }
+    artifactory = {
+      instance_type = "t3.small"
+      policy_resource_list = []
+    }
   }
 }
 
