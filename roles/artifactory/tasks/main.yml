@@ -17,4 +17,3 @@
     name: artifactory
     state: started
     enabled: true
-
